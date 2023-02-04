@@ -7,11 +7,16 @@ class TakePhotoView extends GetView<TakePhotoController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('TakePhotoView'), centerTitle: true),
-      body: const Center(
-        child: Text('TakePhotoView is working', style: TextStyle(fontSize: 20)),
-      ),
-    );
+    return Obx(() {
+      return Scaffold(
+        appBar: AppBar(title: const Text('TakePhotoView'), centerTitle: true),
+        body: Center(
+          child: Text(
+            'photo : ${controller.photo.value}\n latitude : ${controller.latitude.value}\n longitude : ${controller.longitude.value}',
+            style: const TextStyle(fontSize: 20),
+          ),
+        ),
+      );
+    });
   }
 }
