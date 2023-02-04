@@ -3,6 +3,7 @@ import 'package:anj_test/app/modules/covid/views/covid_view.dart';
 import 'package:anj_test/app/modules/home/bindings/home_binding.dart';
 import 'package:anj_test/app/modules/home/views/home_view.dart';
 import 'package:anj_test/app/modules/list_data/bindings/list_data_binding.dart';
+import 'package:anj_test/app/modules/list_data/views/list_data_detail_view.dart';
 import 'package:anj_test/app/modules/list_data/views/list_data_view.dart';
 import 'package:anj_test/app/modules/take_photo/bindings/take_photo_binding.dart';
 import 'package:anj_test/app/modules/take_photo/views/take_photo_view.dart';
@@ -27,6 +28,11 @@ class AppPages {
     GetPage(
       name: _Paths.listData,
       page: () => const ListDataView(),
+      binding: ListDataBinding(),
+    ),
+    GetPage(
+      name: _Paths.listDataDetail,
+      page: () => const ListDataDetailView(),
       binding: ListDataBinding(),
     ),
     GetPage(

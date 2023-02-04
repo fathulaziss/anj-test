@@ -12,7 +12,9 @@ dependencies:
   fluttertoast: ^8.1.2
   geolocator: ^9.0.2
   get: 4.6.5
+  get_storage: ^2.0.3
   image_picker: ^0.8.6+1
+  intl: ^0.18.0
   permission_handler: ^10.2.0
 
 dev_dependencies:

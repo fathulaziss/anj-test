@@ -1,4 +1,5 @@
 import 'package:anj_test/app/modules/home/controllers/home_controller.dart';
+import 'package:anj_test/app/routes/app_pages.dart';
 import 'package:anj_test/utils/app_asset.dart';
 import 'package:anj_test/widgets/buttons/button_primary.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,10 @@ class HomeView extends GetView<HomeController> {
             },
           ),
           const SizedBox(height: 20),
-          ButtonPrimary(label: 'List Data', onPressed: () {}),
+          ButtonPrimary(
+            label: 'List Data',
+            onPressed: () => Get.toNamed(Routes.listData),
+          ),
           const SizedBox(height: 20),
           ButtonPrimary(label: 'API Covid-19', onPressed: () {}),
         ],

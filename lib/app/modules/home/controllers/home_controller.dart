@@ -9,19 +9,6 @@ class HomeController extends GetxController {
   RxBool isCameraGranted = false.obs;
   RxBool isLocationGranted = false.obs;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {}
-
   Future<void> takePhoto() async {
     final picker = ImagePicker();
     final file = await picker.pickImage(source: ImageSource.camera);
@@ -32,14 +19,17 @@ class HomeController extends GetxController {
         arguments: {
           'photo': file.path,
           'latitude': location.latitude,
-          'longitude': location.longitude
+          'longitude': location.longitude,
+          'date': DateTime.now().toString(),
         },
       );
     }
   }
 
   Future<void> checkPermission() async {
-    if (isCameraGranted.value && isLocationGranted.value) {
+    final isCameraGranted = await Permission.camera.isGranted;
+    final isLocationGranted = await Permission.location.isGranted;
+    if (isCameraGranted && isLocationGranted) {
       await takePhoto();
     } else {
       showPopUpInfo(
@@ -50,9 +40,6 @@ class HomeController extends GetxController {
           Get.back();
           await requestCameraPermission();
           await requestLocationPermission();
-          if (isCameraGranted.value && isLocationGranted.value) {
-            await takePhoto();
-          }
         },
       );
     }
@@ -62,6 +49,9 @@ class HomeController extends GetxController {
     final cameraStatus = await Permission.camera.request();
     if (cameraStatus.isGranted) {
       isCameraGranted(true);
+      if (isCameraGranted.value && isLocationGranted.value) {
+        await takePhoto();
+      }
     } else if (cameraStatus.isPermanentlyDenied || cameraStatus.isRestricted) {
       isCameraGranted(false);
       showPopUpInfo(
@@ -83,6 +73,9 @@ class HomeController extends GetxController {
     final locationStatus = await Permission.location.request();
     if (locationStatus.isGranted) {
       isLocationGranted(true);
+      if (isCameraGranted.value && isLocationGranted.value) {
+        await takePhoto();
+      }
     } else if (locationStatus.isPermanentlyDenied ||
         locationStatus.isRestricted) {
       isLocationGranted(false);
